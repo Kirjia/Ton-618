@@ -2,6 +2,7 @@ import numpy as np
 import pandas as pad
 import pandas as pd
 import sklearn
+import math
 import matplotlib as mpl
 import matplotlib.pyplot as plt
 import seaborn
@@ -33,6 +34,16 @@ print(data["SpType"].value_counts())
 data.drop(data[((data["e_Plx"] * 100) / data["Plx"]) >= 10].index, inplace=True)
 
 
+
+
+for index, row in data.iterrows():
+    data['Amag'] = row['Vmag'] - 5*(math.log10(1/math.fabs(row['Plx'])) + 1)
+
+
+
+
+
 data.info()
 print("min: {} max: {}".format(data["e_Plx"].min(), data["e_Plx"].max()))
+
 
