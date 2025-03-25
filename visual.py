@@ -2,9 +2,12 @@ import numpy as np
 import pandas as pad
 import pandas as pd
 import sklearn
+import seaborn as sns
 import math
 import matplotlib as mpl
 import matplotlib.pyplot as plt
+from matplotlib import colors
+from sklearn.ensemble import RandomForestClassifier
 from sklearn.model_selection import train_test_split, cross_val_score
 from sklearn.preprocessing import StandardScaler
 from imblearn.over_sampling import SMOTE
@@ -134,8 +137,14 @@ print("Accuracy:", metrics.accuracy_score(Y_test, Y_pred)
 '''
 
 
+#sns.boxplot( data=data)
+#plt.show()
+data.plot(kind='box', subplots=True, layout=(2,4), figsize=(15,18))
+plt.show()
+
+
 kfold = StratifiedKFold(n_splits=10, random_state=None, shuffle=False)
-tree_model = DecisionTreeClassifier(max_depth=30)
+tree_model = RandomForestClassifier(max_depth=30)
 scores = []
 
 for k, (train_index, test_index) in enumerate(kfold.split(X_smote, Y_smote)):
@@ -144,11 +153,15 @@ for k, (train_index, test_index) in enumerate(kfold.split(X_smote, Y_smote)):
     labels = np.unique(Y_smote[test_index])
     conMat = confusion_matrix(Y_smote[test_index], Y_pred, labels=labels)
     report = classification_report(Y_smote[test_index], Y_pred)
+    recall = metrics.recall_score(Y_smote[test_index], Y_pred, labels=labels)
     score = metrics.accuracy_score(Y_smote[test_index], Y_pred)
+    f1 = metrics.f1_score(Y_smote[test_index], Y_pred, labels=labels)
     result = {}
     result.__setitem__('confusionMatrix', conMat)
     result.__setitem__('report', report)
     result.__setitem__('Acc', score)
+    result.__setitem__('recall', recall)
+    result.__setitem__('f1', f1)
     scores.append(result)
     print('Fold: {} Class dist.: {}, Acc: {}'.format(k+1, np.bincount(Y_smote[train_index]), score))
 
