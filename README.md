@@ -33,11 +33,11 @@ __numpy__
 pip install numpy
 ```
 
-##Contributi
+## Contributi
 I contributi sono benvenuti! Se desideri collaborare:
 
-*Apri una issue per segnalare problemi o suggerire miglioramenti.
+* Apri una issue per segnalare problemi o suggerire miglioramenti.
 
-*Invia una pull request per proporre modifiche o nuove funzionalità.
+* Invia una pull request per proporre modifiche o nuove funzionalità.
 ## Licenza
 Questo progetto è distribuito sotto la licenza MIT License.
