@@ -22,7 +22,7 @@ Per eseguire il progetto si ha bisogno delle librerie __sklearn__, __numpy__, __
 Per poterli installare usare i seguenti comandi:
 __sklearn__
 ```
-pip install pip install -U scikit-learn
+pip install -U scikit-learn
 ```
 __pandas__
 ```
